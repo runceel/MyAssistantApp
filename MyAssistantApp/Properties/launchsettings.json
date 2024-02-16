@@ -1,0 +1,10 @@
+﻿{
+    "profiles": {
+      "MyAssistantApp (Package)": {
+        "commandName": "MsixPackage"
+      },
+      "MyAssistantApp (Unpackaged)": {
+        "commandName": "Project"
+      }
+    }
+}
