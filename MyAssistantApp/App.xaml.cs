@@ -86,7 +86,7 @@ public partial class App : Application
         UnhandledException += App_UnhandledException;
     }
 
-    private void App_UnhandledException(object sender, Microsoft.UI.Xaml.UnhandledExceptionEventArgs e) => HandleUnhandledException(e);
+    private void App_UnhandledException(object sender, Microsoft.UI.Xaml.UnhandledExceptionEventArgs e) => HandleUnhandledException(e.Exception);
 
     private void HandleUnhandledException(Exception ex)
     {

@@ -9,6 +9,8 @@ using MyAssistantApp.Models;
 using Windows.ApplicationModel;
 using Windows.Storage;
 
+using CoreHelpers = MyAssistantApp.Core.Helpers;
+
 namespace MyAssistantApp.Services;
 
 public class LocalSettingsService : ILocalSettingsService
@@ -54,7 +56,7 @@ public class LocalSettingsService : ILocalSettingsService
         {
             if (ApplicationData.Current.LocalSettings.Values.TryGetValue(key, out var obj))
             {
-                return await Json.ToObjectAsync<T>((string)obj);
+                return await CoreHelpers.Json.ToObjectAsync<T>((string)obj);
             }
         }
         else
@@ -63,7 +65,7 @@ public class LocalSettingsService : ILocalSettingsService
 
             if (_settings != null && _settings.TryGetValue(key, out var obj))
             {
-                return await Json.ToObjectAsync<T>((string)obj);
+                return await CoreHelpers.Json.ToObjectAsync<T>((string)obj);
             }
         }
 
@@ -74,13 +76,13 @@ public class LocalSettingsService : ILocalSettingsService
     {
         if (RuntimeHelper.IsMSIX)
         {
-            ApplicationData.Current.LocalSettings.Values[key] = await Json.StringifyAsync(value);
+            ApplicationData.Current.LocalSettings.Values[key] = await CoreHelpers.Json.StringifyAsync(value);
         }
         else
         {
-            await InitializeAsync();
+            await InitializeAsync();Json.More.JsonNull
 
-            _settings[key] = await Json.StringifyAsync(value);
+            _settings[key] = await CoreHelpers.Json.StringifyAsync(value);
 
             await Task.Run(() => _fileService.Save(_applicationDataFolder, _localsettingsFile, _settings));
         }
