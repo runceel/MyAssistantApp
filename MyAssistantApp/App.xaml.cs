@@ -46,6 +46,8 @@ public partial class App : Application
     {
         InitializeComponent();
 
+        R3.WinUI3ProviderInitializer.SetDefaultObservableSystem(HandleUnhandledException);
+
         Host = Microsoft.Extensions.Hosting.Host.
         CreateDefaultBuilder().
         UseContentRoot(AppContext.BaseDirectory).
@@ -84,7 +86,9 @@ public partial class App : Application
         UnhandledException += App_UnhandledException;
     }
 
-    private void App_UnhandledException(object sender, Microsoft.UI.Xaml.UnhandledExceptionEventArgs e)
+    private void App_UnhandledException(object sender, Microsoft.UI.Xaml.UnhandledExceptionEventArgs e) => HandleUnhandledException(e);
+
+    private void HandleUnhandledException(Exception ex)
     {
         // TODO: Log and handle exceptions as appropriate.
         // https://docs.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.application.unhandledexception.

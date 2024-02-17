@@ -29,6 +29,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\ExternalLibraries\R3.WinUI\R3.WinUI.csproj" />
     <ProjectReference Include="..\MyAssistantApp.Core\MyAssistantApp.Core.csproj" />
   </ItemGroup>
   <ItemGroup>
